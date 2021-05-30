@@ -40,7 +40,8 @@ class Category:
         "amount": -amount,
         "description": "Transfer to " + budget_category.category
       })
-      budget_category.deposit(amount, "Transfer from " + self.category)  
+      budget_category.deposit(amount, "Transfer from " + self.category) 
+      return True 
   
   def check_funds(self, amount):
     total_check = 0
@@ -67,7 +68,7 @@ class Category:
       line = desc + amount + '\n'
       output += line
     total = "{:.2f}".format(self.get_balance())
-    output += "Total: " + total + '\n'
+    output += "Total: " + total 
     return output
 
 def create_spend_chart(categories):
@@ -86,27 +87,19 @@ def create_spend_chart(categories):
     category_totals[i] = math.floor(((category_totals[i]/total_spend)*100)/10)*10
 
   graph = "Percentage spent by catergory\n"
-  graph += "100|\n"
+  graph += "100|"
   for i in range(90, -1, -10):
     if len(str(i)) == 1:
-      temp = "  " + str(i) + "| "
+      temp = "          \n  " + str(i) + "| "
       for j in range(len(category_totals)):
         if category_totals[j] >= i:
           temp += "o  "
-        elif j == len(category_totals)-1:
-          temp += "\n"
-        else:
-          temp += "  "
-      graph += "\n" + temp
+      graph += temp
     else:
-      temp = " " + str(i) + "| "
+      temp = "         \n " + str(i) + "| "
       for j in range(len(category_totals)):
         if category_totals[j] >= i:
           temp += "o  "
-        elif j == len(category_totals)-1:
-          temp += "\n"
-        else:
-          temp += "  "
       graph += temp
   graph += "\n    _"
   
